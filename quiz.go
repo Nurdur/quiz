@@ -7,13 +7,17 @@ import (
 	"fmt"
 	"io"
 	"strings"
+	"flag"
 )
 
 
 func main() {
-	// Open the file "problems.csv"
-	// TODO Accept a flag to load a user-specified file instead
-	f, _ := os.Open("./problems.csv")
+	// Either open default or user-specified quiz file
+	var problemsFile string
+	flag.StringVar(&problemsFile,"file", "problems.csv", "name of csv file containing the set of questions and answers")
+	flag.Parse()
+	fmt.Println("Opening", problemsFile)
+	f, _ := os.Open(problemsFile)
 
 	// Create a reader
 	r := csv.NewReader(bufio.NewReader(f))
