@@ -51,10 +51,6 @@ func main() {
 		log.Fatal(err)
 	}
 
-//	Print for debugging
-//	fmt.Print(records)
-
-
 mainLoop:
 	for _, record := range records  {
 		if len(record) != 2 {
@@ -83,5 +79,20 @@ mainLoop:
 		}
 	}
 
-	fmt.Printf("Score: %d out of %d correct. That's %.2f%%\n", score, len(records), 100.0*float64(score)/float64(len(records)))
+	grade := float64(score)/float64(len(records))
+	fmt.Printf("Score: %d out of %d correct. That's %.2f%%", score, len(records), 100.0*grade)
+
+	switch {
+		case grade > 0.9999:
+			fmt.Printf(" Prefect Score!!! Well done!!!\n")
+		case grade > 0.9:
+			fmt.Printf(" You get an A! Good job!\n")
+		case grade > 0.75:
+			fmt.Printf(" Not too shabby.\n")
+		case grade > 0.5:
+			fmt.Printf(" More right than wrong. That's something, at least.\n")
+		default:
+			fmt.Printf(" Better luck next time. Maybe set a really long timer?\n")
+	}
+
 }
